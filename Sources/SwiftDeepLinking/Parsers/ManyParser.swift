@@ -1,6 +1,6 @@
 //
 //  ManyParser.swift
-//  NavigationExample
+// SwiftDeepLinking
 //
 //  Created by Annalise Mariottini on 11/30/24.
 //

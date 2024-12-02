@@ -1,6 +1,6 @@
 //
 //  DeepLinking.swift
-//  NavigationExample
+// SwiftDeepLinking
 //
 //  Created by Annalise Mariottini on 12/2/24.
 //
