@@ -26,8 +26,9 @@ struct DebugOnOpenURLView<Content: View>: View {
 #if os(iOS)
                 .textInputAutocapitalization(.never)
 #endif
-                .padding(3)
                 .autocorrectionDisabled()
+                .font(.system(size: 12))
+                .padding(3)
                 .onSubmit {
                     guard let url = URL(string: urlString) else { return }
                     openURL(url)
