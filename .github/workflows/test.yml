@@ -10,15 +10,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test-linux:
+  test:
     runs-on: ubuntu-latest
     container: swift:6.0
-    steps:
-    - uses: actions/checkout@v4
-    - name: Run tests
-      run: swift test -v
-  test-macos:
-    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
     - name: Run tests
