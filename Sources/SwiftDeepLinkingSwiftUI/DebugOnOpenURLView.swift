@@ -23,7 +23,9 @@ struct DebugOnOpenURLView<Content: View>: View {
     var body: some View {
         VStack {
             TextField("URL to debug", text: $urlString)
+#if os(iOS)
                 .textInputAutocapitalization(.never)
+#endif
                 .padding(3)
                 .autocorrectionDisabled()
                 .onSubmit {
@@ -34,19 +36,6 @@ struct DebugOnOpenURLView<Content: View>: View {
         }
     }
 }
-
-#if os(macOS)
-private enum TextInputAutocapitalization {
-    case never
-}
-
-extension View {
-    /// - Warning: This is a no-op for compilation purposes only.
-    fileprivate func textInputAutocapitalization(_ value: TextInputAutocapitalization) -> Self {
-        self
-    }
-}
-#endif
 
 struct DebugOnOpenURLViewModifier: ViewModifier {
     let baseURL: String
