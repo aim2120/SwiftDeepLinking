@@ -16,6 +16,9 @@ let package = Package(
         .library(
             name: "SwiftDeepLinking",
             targets: ["SwiftDeepLinking"]),
+        .library(
+            name: "SwiftDeepLinkingSwiftUI",
+            targets: ["SwiftDeepLinkingSwiftUI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/aim2120/SwiftParameterPackExtras.git", from: "0.1.0"),
