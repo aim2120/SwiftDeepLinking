@@ -5,6 +5,7 @@
 //  Created by Annalise Mariottini on 11/29/24.
 //
 
+#if canImport(SwiftUI)
 import SwiftUI
 import SwiftDeepLinking
 
@@ -68,3 +69,4 @@ extension View {
         modifier(DebugOnOpenURLViewModifier(baseURL: baseURL, openURL: openURL))
     }
 }
+#endif

@@ -5,9 +5,10 @@
 //  Created by Annalise Mariottini on 11/24/24.
 //
 
+#if canImport(SwiftUI)
+import SwiftUI
 import Foundation
 import Testing
-import SwiftUI
 
 import SwiftDeepLinking
 import SwiftDeepLinkingSwiftUI
@@ -92,3 +93,4 @@ private func combine<S1: Sequence, S2: Sequence>(_ s1: S1, _ s2: S2) -> Array<(S
     }
     return output
 }
+#endif
