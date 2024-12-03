@@ -54,23 +54,6 @@ struct DeepLinkParserTests {
         #expect(parsedLink.fullyParsed)
     }
 
-    @Test
-    func testCustomParser_success() throws {
-        let url = baseURL.appending(path: exactString)
-        let link = try #require(DeepLink.universalLink(url: url))
-
-        let parsedLink = try link
-            .parseLeadingSlash()
-            .parse {
-                ExactStringParser(exactString: exactString)
-            }
-
-        let parsedComponent = parsedLink.components.value
-
-        #expect(parsedLink.fullyParsed)
-        #expect(parsedComponent == exactString)
-    }
-
     @Test(arguments: Self.combineLetterStringInt())
     func testMultipleParsers_success(testCase: (letter: Substring, string: StringEnum, int: IntEnum)) throws {
         let url = baseURL
@@ -86,7 +69,7 @@ struct DeepLinkParserTests {
                 RegexPathParser(/[a-z]/, Substring.self)
                 EnumPathParser(StringEnum.self)
                 EnumPathParser(IntEnum.self) { Int($0) }
-                ExactStringParser(exactString: exactString)
+                ExactStringParser(exactString)
             }
 
         let parsedLetterComponent = parsedLink.components.0
@@ -115,24 +98,6 @@ struct DeepLinkParserTests {
         }
     }
 
-    @Test
-    func testCustomParser_failure() throws {
-        let url = baseURL.appending(path: "\(exactString)0")
-        let link = try #require(DeepLink.universalLink(url: url))
-
-        // replicate the link mutation
-        let parsedLink = link.parseLeadingSlash()
-        let failingParser = ExactStringParser(exactString: exactString)
-
-        #expect(throws: ParsingError.unableToParse(link: parsedLink, parser: failingParser)) {
-            try link
-                .parseLeadingSlash()
-                .parse {
-                    failingParser
-                }
-        }
-    }
-
     @Test(arguments: Self.combineLetterStringInt())
     func testMultipleParsers_failure(testCase: (letter: Substring, string: StringEnum, int: IntEnum)) throws {
         let url = baseURL
@@ -153,7 +118,7 @@ struct DeepLinkParserTests {
                     failingParser
                     EnumPathParser(StringEnum.self)
                     EnumPathParser(IntEnum.self) { Int($0) }
-                    ExactStringParser(exactString: exactString)
+                    ExactStringParser(exactString)
                 }
         }
     }
@@ -181,7 +146,7 @@ struct DeepLinkParserTests {
                     RegexPathParser(/[a-z]/, Substring.self)
                     EnumPathParser(StringEnum.self)
                     failingParser
-                    ExactStringParser(exactString: exactString)
+                    ExactStringParser(exactString)
                 }
         }
     }
