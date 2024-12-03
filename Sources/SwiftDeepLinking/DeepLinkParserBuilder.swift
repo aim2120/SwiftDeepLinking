@@ -7,6 +7,7 @@
 
 /// A result builder for ``DeepLinkParser`` parameter packs.
 @resultBuilder public enum DeepLinkParserBuilder {
+    // swiftlint:disable missing_docs
 
     // MARK: Parameter Pack
 
@@ -35,4 +36,6 @@
     public static func buildEither<P: DeepLinkParser>(second parsers: (P)) -> (P) {
         (parsers)
     }
+
+    // swiftlint:enable missing_docs
 }

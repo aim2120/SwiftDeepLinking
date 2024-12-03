@@ -9,11 +9,6 @@ import Foundation
 
 /// Represents a deep link to be parsed.
 public struct DeepLink: Hashable {
-    private init(url: URL, type: DeepLinkType, state: DeepLinkState) {
-        self.url = url
-        self.type = type
-        self.state = state
-    }
 
     /// Returns a deep link to parse, detecting whether it's a URL scheme link or universal link by comparing the URL scheme to the main bundle ID.
     /// If the passed URL scheme does not match, then it is assumed to be a universal link.
@@ -99,7 +94,7 @@ extension DeepLink {
         state.unmatchedPath.last
     }
     /// Returns the remainig query to parse, if any.
-    public var unmatchedQuery: [String: String]? {
+    public var unmatchedQuery: [String: String]? { // swiftlint:disable:this discouraged_optional_collection
         guard !state.unmatchQuery.isEmpty else {
             return nil
         }

@@ -11,7 +11,7 @@ import Testing
 import SwiftDeepLinking
 
 struct EnumParserTests {
-    let baseURL = URL(string: "https://www.app.com")!
+    private let baseURL = URL(string: "https://www.app.com")! // swiftlint:disable:this force_unwrapping
 
     // MARK: EnumPathParser
 

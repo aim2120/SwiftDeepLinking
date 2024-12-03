@@ -12,7 +12,7 @@ import RegexBuilder
 import SwiftDeepLinking
 
 struct RegexParserTests {
-    let baseURL = URL(string: "https://www.app.com")!
+    private let baseURL = URL(string: "https://www.app.com")! // swiftlint:disable:this force_unwrapping
 
     // MARK: RegexPathParser
 
@@ -58,7 +58,7 @@ struct RegexParserTests {
             """)
     }
 
-    @Test(arguments:[
+    @Test(arguments: [
         ("0123", ["0123"], true),
         ("0123/456", ["0123", "456"], true),
         ("0123/456/789", ["0123", "456", "789"], true),

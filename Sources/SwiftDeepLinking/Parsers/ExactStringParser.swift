@@ -33,4 +33,5 @@ extension ExactStringParser where ParsedComponent == String {
     }
 }
 
+/// Short name for ``ExactStringParser``.
 public typealias Exactly = ExactStringParser

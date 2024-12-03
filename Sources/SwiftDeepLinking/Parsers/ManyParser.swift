@@ -50,4 +50,5 @@ public struct ManyParser<P: DeepLinkParser>: DeepLinkParser {
     }
 }
 
+/// Short name for ``ManyParser``.
 public typealias Many = ManyParser

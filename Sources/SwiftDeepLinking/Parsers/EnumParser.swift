@@ -66,7 +66,7 @@ public struct EnumQueryParser<EnumType: RawRepresentable & Hashable>: DeepLinkPa
     ///   - enumType: The enum type this parser detects in string path components.
     ///   - key: The query key to match.
     ///   - valueTransform: A function to transform the string path component into the enum type, if possible.
-    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self,
+    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self, // swiftlint:disable:this function_default_parameter_at_end
                                    key: S,
                                    valueTransform: @escaping (String) -> EnumType.RawValue?) {
         self.init(enumType, key: { $0 == key }, valueTransform: valueTransform)
@@ -78,7 +78,7 @@ public struct EnumQueryParser<EnumType: RawRepresentable & Hashable>: DeepLinkPa
     ///   - enumType: The enum type this parser detects in string path components.
     ///   - key: The query key to match.
     ///   - valueTransform: A function to transform the string path component into the enum type, if possible.
-    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self,
+    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self, // swiftlint:disable:this function_default_parameter_at_end
                                    key: Regex<S>,
                                    regexStrategy: RegexMatchStrategy = .wholeMatch,
                                    valueTransform: @escaping (String) -> EnumType.RawValue?) {
@@ -117,7 +117,7 @@ extension EnumQueryParser where EnumType.RawValue: StringProtocol {
     /// - Parameters:
     ///   - enumType: The enum type this parser detects in string path components.
     ///   - key: The query key to match.
-    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self,
+    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self, // swiftlint:disable:this function_default_parameter_at_end
                                    key: S) {
         self.init(enumType, key: { $0 == key }, valueTransform: { .init($0) })
     }
@@ -127,7 +127,7 @@ extension EnumQueryParser where EnumType.RawValue: StringProtocol {
     /// - Parameters:
     ///   - enumType: The enum type this parser detects in string path components.
     ///   - key: The query key to match.
-    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self,
+    public init<S: StringProtocol>(_ enumType: EnumType.Type = EnumType.self, // swiftlint:disable:this function_default_parameter_at_end
                                    key: Regex<S>,
                                    regexStrategy: RegexMatchStrategy = .wholeMatch) {
         self.init(enumType, key: { (try? key.match(in: $0, strategy: regexStrategy)) != nil }, valueTransform: { .init($0) })

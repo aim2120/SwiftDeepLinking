@@ -27,7 +27,7 @@ public struct RegexPathParser<Output, ParsedComponent: Hashable>: DeepLinkParser
     let regex: Regex<Output>
     let config: RegexParserConfig
     let transform: (Regex<Output>.Match) -> ParsedComponent?
-    
+
     public func parse(link: inout DeepLink) -> DeepLinkComponent<ParsedComponent>? {
         if let component = link.consumeNextPath(if: { next in
             if let match = try? regex.match(in: next, strategy: config.strategy) {
@@ -114,8 +114,13 @@ extension RegexQueryParser where ValueOutput == ParsedComponent {
 
 /// Configuration options for a regex parser.
 public struct RegexParserConfig {
+    /// Creates a new config with the passed values, or defaults if not provided.
+    ///
+    /// - Parameters:
+    ///   - strategy: The regex matching strategy to use (defaults to `wholeMatch`).
     public init(strategy: RegexMatchStrategy = .wholeMatch) {
         self.strategy = strategy
     }
+    /// The regex matching strategy to use.
     public let strategy: RegexMatchStrategy
 }

@@ -47,4 +47,5 @@ public struct OptionallyParser<P: DeepLinkParser>: DeepLinkParser {
     }
 }
 
+/// Short name for ``OptionallyParser``.
 public typealias Optionally = OptionallyParser

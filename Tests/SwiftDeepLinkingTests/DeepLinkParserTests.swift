@@ -14,7 +14,7 @@ struct DeepLinkParserTests {
 
     // MARK: Helpers
 
-    private let baseURL = URL(string: "https://www.app.com")!
+    private let baseURL = URL(string: "https://www.app.com")! // swiftlint:disable:this force_unwrapping
     private let exactString = "hello_world"
 
     enum StringEnum: String, Hashable, CaseIterable {
@@ -151,6 +151,3 @@ struct DeepLinkParserTests {
         }
     }
 }
-
-
-

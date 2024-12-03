@@ -38,6 +38,7 @@ public struct ParsersParser<ParsedComponent: Hashable, each P: DeepLinkParser>: 
 }
 
 extension ParsersParser where ParsedComponent == HashablePack<repeat (each P).ParsedComponent> {
+    /// Creates a new parsers container that outputs a `HashablePack` containin the inner parsers' components.
     public init(
         _ parsedComponent: ParsedComponent.Type = ParsedComponent.self,
         @DeepLinkParserBuilder parsers: @escaping () -> (repeat (each P))
@@ -48,4 +49,5 @@ extension ParsersParser where ParsedComponent == HashablePack<repeat (each P).Pa
     }
 }
 
+/// Short name for ``ParsersParser``.
 public typealias Parsers = ParsersParser

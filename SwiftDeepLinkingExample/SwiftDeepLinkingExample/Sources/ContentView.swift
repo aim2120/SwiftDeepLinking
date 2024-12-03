@@ -69,7 +69,7 @@ public struct ContentView: View {
                 guard let link = DeepLink.detectLinkUsingBundleID(url: url) else { return }
                 parse(link: link)
             }
-            .debugOnOpenURL(baseURL: "\(Bundle.main.bundleIdentifier!)://") { url in
+            .debugOnOpenURL(baseURL: "\(Bundle.main.bundleIdentifier!)://") { url in // swiftlint:disable:this force_unwrapping
                 guard let link = DeepLink.detectLinkUsingBundleID(url: url) else { return }
                 parse(link: link)
             }

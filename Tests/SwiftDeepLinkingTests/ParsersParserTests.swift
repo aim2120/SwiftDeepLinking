@@ -12,7 +12,7 @@ import SwiftParameterPackExtras
 import SwiftDeepLinking
 
 struct ParsersParserTests {
-    let baseURL = URL(string: "https://www.app.com")!
+    private let baseURL = URL(string: "https://www.app.com")! // swiftlint:disable:this force_unwrapping
 
     @Test(arguments: [
         ("abc", "abc"),

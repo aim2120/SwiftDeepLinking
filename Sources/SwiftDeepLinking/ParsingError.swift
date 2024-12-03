@@ -44,6 +44,6 @@ extension ParsingError: Equatable {
 
 extension DeepLinkParser {
     fileprivate func isSameType(as other: any DeepLinkParser) -> Bool {
-        other as? Self != nil
+        other is Self
     }
 }
