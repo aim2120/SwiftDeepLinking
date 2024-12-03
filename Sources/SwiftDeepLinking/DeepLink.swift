@@ -107,7 +107,7 @@ extension DeepLink {
 }
 
 extension DeepLink {
-    /// Consumes the next path component if the passed closure returns true, `nil` otherwise.
+    /// Consumes the next path component if the passed closure returns some value, `nil` otherwise.
     public mutating func consumeNextPath<T: Hashable>(if transformPath: (String) -> T?) -> T? {
         guard let nextPath, let transformed = transformPath(nextPath) else {
             return nil
@@ -117,7 +117,7 @@ extension DeepLink {
         return transformed
     }
 
-    /// Consumes the query item if the passed closure returns true, `nil` otherwise.
+    /// Consumes the query item if the passed closure returns some value, `nil` otherwise.
     public mutating func consumeQuery<T: Hashable>(if transformQuery: ((key: String, value: String)) -> T?) -> T? {
         guard let unmatchedQuery else { return nil }
         for query in unmatchedQuery {
