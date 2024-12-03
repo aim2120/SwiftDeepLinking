@@ -5,8 +5,6 @@
 //  Created by Annalise Mariottini on 12/1/24.
 //
 
-import SwiftDeepLinking
-
 /// A deep link parser that parses an exact string.
 public struct ExactStringParser<ParsedComponent: Hashable>: DeepLinkParser {
     /// Creates a new exact string parser that transforms to some parsed component value.
