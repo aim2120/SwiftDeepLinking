@@ -79,4 +79,34 @@ struct ParsersParserTests {
             Added path: \(addedPath)
             """)
     }
+
+    @Test(arguments: [
+        ("", 0),
+        ("abc", 1),
+        ("123", 0),
+        ("abc/abc", 1),
+        ("123/123", 0),
+    ])
+    func testParsersParser_failure(addedPath: String, consuming paths: Int) throws {
+        let url = baseURL.appending(path: addedPath)
+        let link = try #require(DeepLink.universalLink(url: url))
+
+        var parsedLink = link.parseLeadingSlash()
+        for _ in 0..<paths {
+            _ = parsedLink.consumeNextPath(if: { _ in true })
+        }
+
+        let parser = Parsers {
+            RegexPathParser(/[a-z]+/)
+            RegexPathParser(/[0-9]+/)
+        }
+
+        #expect(throws: ParsingError.unableToParse(link: parsedLink, parser: parser)) {
+            try link
+                .parseLeadingSlash()
+                .parse {
+                    parser
+                }
+        }
+    }
 }

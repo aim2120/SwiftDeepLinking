@@ -17,18 +17,23 @@ public struct ParsersParser<ParsedComponent: Hashable, each P: DeepLinkParser>: 
     public init(
         _ parsedComponent: ParsedComponent.Type = ParsedComponent.self,
         @DeepLinkParserBuilder parsers: @escaping () -> (repeat (each P)),
-        transform: @escaping (repeat DeepLinkComponent<(each P).ParsedComponent>?) -> DeepLinkComponent<ParsedComponent>?
+        transform: @escaping (repeat DeepLinkComponent<(each P).ParsedComponent>) -> DeepLinkComponent<ParsedComponent>?
     ) {
         self.parsers = (repeat (each parsers()))
         self.transform = transform
     }
 
     let parsers: (repeat each P)
-    let transform: (repeat DeepLinkComponent<(each P).ParsedComponent>?) -> DeepLinkComponent<ParsedComponent>?
+    let transform: (repeat DeepLinkComponent<(each P).ParsedComponent>) -> DeepLinkComponent<ParsedComponent>?
 
     public func parse(link: inout DeepLink) -> DeepLinkComponent<ParsedComponent>? {
-        let output = (repeat (each parsers).parse(link: &link))
-        return transform(repeat each output)
+        do {
+            // can't use NonOptionalTuple, since we need to short circuit if one fails
+            let output = try (repeat (each parsers).parse(link: &link) ?? { throw CancellationError() }())
+            return transform(repeat each output)
+        } catch {
+            return nil
+        }
     }
 }
 
@@ -37,11 +42,8 @@ extension ParsersParser where ParsedComponent == HashablePack<repeat (each P).Pa
         _ parsedComponent: ParsedComponent.Type = ParsedComponent.self,
         @DeepLinkParserBuilder parsers: @escaping () -> (repeat (each P))
     ) {
-        self.init(parsedComponent, parsers: parsers, transform: { (components: repeat DeepLinkComponent<(each P).ParsedComponent>?) -> DeepLinkComponent<ParsedComponent>? in
-            guard let nonOptionalComponents = NonOptionalTuple(repeat (each components)?.value) else {
-                return nil
-            }
-            return DeepLinkComponent(HashablePack(repeat each nonOptionalComponents))
+        self.init(parsedComponent, parsers: parsers, transform: { (components: repeat DeepLinkComponent<(each P).ParsedComponent>) -> DeepLinkComponent<ParsedComponent>? in
+            DeepLinkComponent(HashablePack(repeat (each components).value))
         })
     }
 }
