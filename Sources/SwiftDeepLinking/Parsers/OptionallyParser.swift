@@ -37,9 +37,12 @@ public struct OptionallyParser<P: DeepLinkParser>: DeepLinkParser {
     let parser: P
 
     public func parse(link: inout DeepLink) -> DeepLinkComponent<ParsedComponent>? {
+        let initial = link
         if let component = parser.parse(link: &link) {
             return DeepLinkComponent(component.value)
         }
+        // undo any mutations performed by the unsuccessful parser
+        link = initial
         return DeepLinkComponent(nil)
     }
 }
