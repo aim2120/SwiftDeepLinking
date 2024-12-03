@@ -5,20 +5,64 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftDeepLinking",
+    platforms: [
+        .macOS(.v14),
+        .iOS(.v17),
+        .tvOS(.v17),
+        .watchOS(.v10),
+        .visionOS(.v1),
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SwiftDeepLinking",
             targets: ["SwiftDeepLinking"]),
+        .library(
+            name: "SwiftDeepLinkingSwiftUI",
+            targets: ["SwiftDeepLinkingSwiftUI"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/aim2120/SwiftParameterPackExtras.git", from: "0.1.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftDeepLinking"),
+            name: "SwiftDeepLinking",
+            dependencies: [
+                .product(name: "SwiftParameterPackExtras", package: "SwiftParameterPackExtras"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals"),
+            ]
+        ),
+        .target(
+            name: "SwiftDeepLinkingSwiftUI",
+            dependencies: [
+                "SwiftDeepLinking",
+                .product(name: "SwiftParameterPackExtras", package: "SwiftParameterPackExtras"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals")
+            ]
+        ),
         .testTarget(
             name: "SwiftDeepLinkingTests",
-            dependencies: ["SwiftDeepLinking"]
+            dependencies: [
+                "SwiftDeepLinking",
+                .product(name: "SwiftParameterPackExtras", package: "SwiftParameterPackExtras"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals")
+            ]
+        ),
+        .testTarget(
+            name: "SwiftDeepLinkingSwiftUITests",
+            dependencies: [
+                "SwiftDeepLinking",
+                "SwiftDeepLinkingSwiftUI",
+                .product(name: "SwiftParameterPackExtras", package: "SwiftParameterPackExtras"),
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("BareSlashRegexLiterals")
+            ]
         ),
     ]
 )

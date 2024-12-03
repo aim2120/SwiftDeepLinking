@@ -1,0 +1,15 @@
+{
+  "originHash" : "efeb7fc62aba4ac9277f18bb58f2f1c628bf11291977529f27471ff2484db004",
+  "pins" : [
+    {
+      "identity" : "swiftparameterpackextras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aim2120/SwiftParameterPackExtras.git",
+      "state" : {
+        "revision" : "1bd9cdddc2676a7b0ab4ee2e1421189070c94063",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 3
+}
