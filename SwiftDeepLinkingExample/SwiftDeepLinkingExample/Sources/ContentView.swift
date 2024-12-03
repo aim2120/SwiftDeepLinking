@@ -37,26 +37,17 @@ public struct ContentView: View {
                 }
                 .throwIfNotFullyParsed()
 
-            let components = parsedLink.components
-            let values = MapComponentsToValues(components)
+            let values = MapComponentsToValues(parsedLink.components)
             if let firstPack = values.0 {
-                let values = firstPack.value
                 navigationPath = navigationPath
                     .removingAll()
-                    .appending(values.0)
-                    .appending(values.1)
-                    .appendingIfSome(values.2)
+                    .appendingNonOptional(pack: firstPack.value)
             } else if let secondPack = values.1 {
-                let values = secondPack.value
                 navigationPath = navigationPath
                     .removingAll()
-                    .appending(values.0)
-                    .appending(values.1)
-                    .appendingIfSome(values.2)
+                    .appendingNonOptional(pack: secondPack.value)
             }
-            withAnimation {
-                colorScheme = values.2?.colorScheme
-            }
+            colorScheme = values.2?.colorScheme
         } catch {
             print(error.localizedDescription)
         }

@@ -30,7 +30,7 @@ public struct NavigationView: View {
                     })
                 })
                 listPage(next: PageB1.self,
-                         current: Text("Path 1"),
+                         current: Text("Path 2"),
                          content: { pageSelection(PageB1.self) },
                          destination: { page in
                     listPage(next: PageB2.self,
