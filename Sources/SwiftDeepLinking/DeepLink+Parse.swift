@@ -14,6 +14,12 @@ extension DeepLink {
         copy.filterLeadingSlash()
         return copy
     }
+
+    public func parseEmptyPath() -> Self {
+        var copy = self
+        copy.filterEmptyPath()
+        return copy
+    }
 }
 
 // MARK: Parse and Return

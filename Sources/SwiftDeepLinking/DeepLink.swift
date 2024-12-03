@@ -140,6 +140,10 @@ extension DeepLink {
         state.filterLeadingSlash()
     }
 
+    mutating func filterEmptyPath() {
+        state.filterEmptyPath()
+    }
+
     @discardableResult
     mutating func popUnmatchedPath() -> String? {
         state.unmatchedPath.popLast()
@@ -184,5 +188,9 @@ struct DeepLinkState: Hashable {
 
     mutating func filterLeadingSlash() {
         self.unmatchedPath = self.unmatchedPath.filter { $0 != "/" }
+    }
+
+    mutating func filterEmptyPath() {
+        self.unmatchedPath = self.unmatchedPath.filter { !$0.isEmpty }
     }
 }
