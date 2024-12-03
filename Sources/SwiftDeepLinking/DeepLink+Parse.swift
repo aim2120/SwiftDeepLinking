@@ -15,6 +15,10 @@ extension DeepLink {
         return copy
     }
 
+    /// Automatically parsese empty paths in a deep link URL.
+    ///
+    /// This may be useful if you want to support deep link URLs that contain only query items, but no path components.
+    /// E.g. `com.app://?query=...`.
     public func parseEmptyPath() -> Self {
         var copy = self
         copy.filterEmptyPath()
@@ -28,7 +32,7 @@ extension DeepLink {
     /// Parses the current link using the passed parser.
     ///
     /// - Parameters:
-    ///   - parsers: A result builder to specify different parsers that should be used to parse this deep link into components.///
+    ///   - parsers: A result builder to specify different parsers that should be used to parse this deep link into components.
     /// - Returns: A tuple of the parsed components from each parser, along with the parsed link.
     /// - Throws: A ``ParsingError`` if one of the parsers is unable to parse an element.
     @discardableResult
@@ -52,7 +56,7 @@ extension DeepLink {
     /// Parses the current link using the passed list of parsers.
     ///
     /// - Parameters:
-    ///   - parser: A result builder to specify different parsers that should be used to parse this deep link into components.///
+    ///   - parser: A result builder to specify different parsers that should be used to parse this deep link into components.
     /// - Returns: The parsed component from the parser, along with the parsed link.
     /// - Throws: A ``ParsingError`` if the parser is unable to parse an element.
     @discardableResult

@@ -76,6 +76,7 @@ extension DeepLink: CustomStringConvertible {
     public var description: String {
         let values: [(key: String, value: String)] = [
             ("url", "\"\(url.description)\""),
+            ("type", "\(type)"),
             ("matchedPath", state.matchedPath.description),
             ("unmatchedPath", state.unmatchedPath.description),
             ("matchedQuery", state.matchedQuery.description),

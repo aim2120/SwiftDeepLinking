@@ -25,7 +25,7 @@
 /// This will successfully parse:
 /// - `/<PageA>?queryA=<QueryA>`
 /// - `/<PageA>?queryA=<QueryA>&queryB=<QueryB>`
-/// - `/<PageA>/<PageB>?query_a=<query_a>`
+/// - `/<PageA>/<PageB>?queryA=<QueryA>`
 /// - `/<PageA>/<PageB>?queryA=<QueryA>&queryB=<QueryB>`
 public struct OptionallyParser<P: DeepLinkParser>: DeepLinkParser {
     public typealias ParsedComponent = P.ParsedComponent?
