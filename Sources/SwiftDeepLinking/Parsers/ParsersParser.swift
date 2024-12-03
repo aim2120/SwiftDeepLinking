@@ -12,7 +12,26 @@ import SwiftParameterPackExtras
 /// This parser may be useful if you're defining a complex hierarchy of potential deep link paths.
 /// For example, if your app has a variety of different deep links that it supports, you can wrap a given path in ``Parsers`` to provide it as a potential path the deep link may contain.
 ///
-/// TODO: Example
+/// ```swift
+/// link
+/// .parseLeadingSlash()
+/// .parse {
+///     // path option 1
+///     Optionally {
+///         Parsers {
+///             // ...
+///         }
+///     }
+///     // path option 2
+///     Optionally {
+///         Parsers {
+///             // ...
+///         }
+///     }
+/// }
+/// ```
+///
+/// You can also use ``Parsers`` to wrap a group of parsers that you want to consume in multiple places.
 public struct ParsersParser<ParsedComponent: Hashable, each P: DeepLinkParser>: DeepLinkParser {
     public init(
         _ parsedComponent: ParsedComponent.Type = ParsedComponent.self,
