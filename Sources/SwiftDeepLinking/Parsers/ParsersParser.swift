@@ -7,6 +7,12 @@
 
 import SwiftParameterPackExtras
 
+/// A parser that may contain other parsers, outputting a tuple of their corresponding component values.
+///
+/// This parser may be useful if you're defining a complex hierarchy of potential deep link paths.
+/// For example, if your app has a variety of different deep links that it supports, you can wrap a given path in ``Parsers`` to provide it as a potential path the deep link may contain.
+///
+/// TODO: Example
 public struct ParsersParser<ParsedComponent: Hashable, each P: DeepLinkParser>: DeepLinkParser {
     public init(
         _ parsedComponent: ParsedComponent.Type = ParsedComponent.self,

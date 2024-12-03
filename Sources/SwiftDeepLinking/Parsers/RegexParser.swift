@@ -7,7 +7,7 @@
 
 // MARK: RegexPathParser
 
-/// A deep link parser that parses some regex into a parsed component output.
+/// A deep link parser that parses path components against some regex into a parsed component output.
 public struct RegexPathParser<Output, ParsedComponent: Hashable>: DeepLinkParser {
     /// Creates a new regex parser for the given regex.
     ///
@@ -56,6 +56,7 @@ extension RegexPathParser where Output == ParsedComponent {
 
 // MARK: RegexQueryParser
 
+/// A deep link parser that parses query items against key and value regexes into a parsed component output.
 public struct RegexQueryParser<KeyOutput, ValueOutput, ParsedComponent: Hashable>: DeepLinkParser {
     /// Creates a new regex parser for the given regex.
     ///

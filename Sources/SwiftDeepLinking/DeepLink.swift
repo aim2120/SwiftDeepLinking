@@ -167,13 +167,17 @@ struct DeepLinkState: Hashable {
     }
     /// The full deep link URL.
     let url: URL
-    /// The portion that's left to match (reversed order).
+    /// The URL path that's left to match (reversed order).
     var unmatchedPath: [String]
-    /// The portion that's been matched so far.
+    /// The URL path that's been matched so far.
     var matchedPath: [String] = []
+    /// The URL query that's left to match.
     var unmatchQuery: [String: String]
+    /// The URL query that's been matched so far.
     var matchedQuery: [String: String] = [:]
 
+    /// Returns true when the link is fully parsed.
+    /// Returns false when the link still has unparsed path or query values.
     var fullyParsed: Bool {
         unmatchedPath.isEmpty && unmatchQuery.isEmpty
     }

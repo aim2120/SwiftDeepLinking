@@ -9,8 +9,10 @@ import Foundation
 
 /// Errors that may occur while parsing.
 public enum ParsingError: Error, LocalizedError {
-    /// Thrown when a link is unable to be parsed by any of the provided parsers.
+    /// Thrown when a link is not fully parsed.
+    /// (Usually by ``DeepLink/throwIfNotFullyParsed()`` or ``ParsedDeepLink/throwIfNotFullyParsed()``.)
     case notFullyParsed(link: DeepLink)
+    /// Thrown when a parser is unable to parse the deep link.
     case unableToParse(link: DeepLink, parser: any DeepLinkParser)
 
     public var errorDescription: String? {

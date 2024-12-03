@@ -8,13 +8,7 @@
 import Foundation
 
 extension DeepLink {
-    /// Throws an error if the current link is not fully parsed.
-    /// This may be called after `parse`, if you want to throw an error when the link isn't fully handled.
-    ///
-    /// Example
-    /// ```
-    /// univeralLink.parse(handler: Navig
-    /// ```
+    /// Throws a ``ParsingError/notFullyParsed(link:)`` error if the deep link is not fully parsed.
     public func throwIfNotFullyParsed() throws {
         if !fullyParsed {
             throw ParsingError.notFullyParsed(link: self)

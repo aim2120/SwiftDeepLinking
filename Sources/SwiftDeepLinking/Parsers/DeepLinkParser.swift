@@ -7,8 +7,9 @@
 
 import Foundation
 
-/// A type that parse a deep link, one path component at a time.
+/// A type that parse a deep link to return some parsed component type.
 public protocol DeepLinkParser {
+    /// The type that's returned after successfully parsing a deep link.
     associatedtype ParsedComponent: Hashable
     /// Implements parsing of the passed deep link.
     /// If the next link path component can be parsed by this parser, a link component should be returned with a corresponding value.
@@ -22,9 +23,10 @@ public protocol DeepLinkParser {
     /// struct ExactStringParser: DeepLinkParser {
     ///     let exactString: String
     ///
-    ///     func parse(link: DeepLink) -> UniveralLinkComponent<String>? {
-    ///         guard let next = link.next else { return nil }
-    ///         guard next == exactString else { return nil }
+    ///     func parse(link: inout DeepLink) -> UniveralLinkComponent<String>? {
+    ///         guard let exactString = link.consumeNextPath(if: { $0 == exactString ? $0 : nil }) else {
+    ///             return nil
+    ///         }
     ///         return DeepLinkComponent(exactString)
     ///     }
     /// }
